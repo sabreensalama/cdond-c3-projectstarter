@@ -1,5 +1,4 @@
 version: 2.1
-
 orbs:
   slack: circleci/slack@4.3.0
 
@@ -99,6 +98,33 @@ jobs:
              cd backend
              npm install
              npm audit fix --audit-level=critical --force
+  deploy-infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      # - run:
+      #     name: install gzip & tar
+      #     command: |
+            
+      - run:
+          name: Ensure back-end infrastructure exists
+          command: |
+           aws cloudformation deploy \
+           --template-file .circleci/files/backend.yml \
+           --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+           --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
+           --tags project=udapeople 
+              exit 1
+      - run:
+          name: Ensure front-end infrastructure exist
+          command: |
+           aws cloudformation deploy \
+           --template-file .circleci/files/backend.yml \
+           --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+           --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
+           --tags project=udapeople 
+              exit 1
 
 workflows:
   default:
@@ -112,4 +138,9 @@ workflows:
       - scan-backend:
           requires: [build-backend]
       - scan-frontend:
-          requires: [build-frontend]     
+          requires: [build-frontend]    
+      - deploy-infrastructure:
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          filters:
+            branches:
+              only: [test-feature-branch] 
