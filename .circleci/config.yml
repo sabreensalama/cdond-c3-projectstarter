@@ -8,7 +8,17 @@ commands:
       - slack/notify:
           event: fail
           template: basic_fail_1
-
+  destroy-environment:
+    description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
+    parameters:
+      circle_workflow_id:
+        type: string
+    steps:
+      - run:
+          name: Destroy environments
+          when: on_fail
+          command: |
+             aws cloudformation delete --stack-name "udapeople-*-<<parameters.circle_workflow_id>>
 jobs:
   build-frontend:
     docker:
@@ -103,9 +113,11 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      # - run:
-      #     name: install gzip & tar
-      #     command: |
+      - run:
+          name: install gzip & tar
+          command: |
+            sudo apt-get install tar
+            sudo apt-get install gzip
             
       - run:
           name: Ensure back-end infrastructure exists
