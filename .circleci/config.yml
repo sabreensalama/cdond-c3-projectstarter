@@ -204,10 +204,10 @@ jobs:
       - run:
           name: Run migrations
           command: |
-           cd backend
-           npm install
-           npm run build
-           npm run migrations
+          #  cd backend
+          #  npm install
+          #  npm run build
+          #  npm run migrations
       - run:
           name: Send migration results to kvdb
           command: |
@@ -409,8 +409,8 @@ workflows:
               only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      # - run-migrations:
-      #     requires: [configure-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
       - deploy-backend:
