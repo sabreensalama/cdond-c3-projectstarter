@@ -267,10 +267,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-           apt update
-           apt install -y tar gzip
-           apt install node
-           apt install npm
+           yum update
+           yum install -y tar gzip
+           yumm install node
+           yum install npm
            pip3 install ansible
       - run:
           name: Deploy backend
