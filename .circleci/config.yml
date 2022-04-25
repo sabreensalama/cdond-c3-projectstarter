@@ -229,8 +229,6 @@ jobs:
           command: |
            yum update
            yum install -y python3
-           curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash -
-           yum install –y nodejs
            pip3 install ansible
            pip3 install awscli
       - run:
@@ -267,11 +265,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-           yum update
-           yum install -y tar gzip
-           yum install node
-           yum install npm
+           apk add -y tar gzip
            pip3 install ansible
+           pip3 install awscli
       - run:
           name: Deploy backend
           command: |
