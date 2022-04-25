@@ -208,10 +208,9 @@ jobs:
           command: |
             cd backend
             cat .env
-            npm cache clean –force
             npm i
-            npm run build
             npm audit fix
+            npm run build
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
@@ -222,8 +221,6 @@ jobs:
            # bucket id created from curl -d 'email=your-email-ID@domain.com' https://kvdb.io
            curl https://kvdb.io/9QYu1AzEtPnLKeZ3vG66Qb/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
            fi
-      - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   deploy-frontend:
     docker:
