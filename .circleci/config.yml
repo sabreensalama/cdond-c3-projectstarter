@@ -208,8 +208,10 @@ jobs:
           command: |
             cd backend
             cat .env
+            rm -r node_modules
+            rm package-lock.json
             npm i
-            npm audit fix
+            npm audit fix --force
             npm run build
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
