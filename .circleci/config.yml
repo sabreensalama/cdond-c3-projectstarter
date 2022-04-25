@@ -227,10 +227,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-           apt update
-           apt install python3.8
-           apt install node
-           apt install npm
+           yum update
+           yum install python3.8
+           yum install node
+           yumm install npm
            pip3 install ansible
            pip3 install awscli
       - run:
