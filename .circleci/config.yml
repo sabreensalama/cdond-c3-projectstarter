@@ -208,8 +208,10 @@ jobs:
           command: |
             cd backend
             cat .env
+            npm cache clean –force
             npm i
             npm run build
+            npm audit fix
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
