@@ -263,13 +263,16 @@ jobs:
       - checkout
       - add_ssh_keys:
          fingerprints: ["32:6d:3a:c1:d5:4a:35:f2:db:37:f6:dc:27:36:0a:2a"] 
+      - run:
+          name: install tar and gzip
+          command: |
+           yum install -y tar gzip
       - attach_workspace:
           at: ~/
       - run:
           name: Install dependencies
           command: |
            yum update
-           yum install -y tar gzip
            yum install -y python3
            curl -sL https://rpm.nodesource.com/setup_10.x |  bash -
            yum install -y nodejs
