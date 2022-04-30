@@ -311,7 +311,7 @@ jobs:
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env
             echo "${API_URL}"
-            curl "${API_URL}/api/status" | grep "ok"
+            #curl "${API_URL}/api/status" | grep "ok"
 
       - run:
           name: Frontend smoke test.
