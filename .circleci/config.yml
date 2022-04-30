@@ -258,7 +258,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: amazon/aws-cli
     steps:
       - checkout
       - add_ssh_keys:
@@ -268,9 +268,11 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-           apk add  tar gzip
-           apk --update --upgrade add gcc musl-dev jpeg-dev zlib-dev libressl-dev libffi-dev cairo-dev pango-dev gdk-pixbuf-dev
-           pip3 install cryptography
+           yum update
+           yum install -y tar gzip
+           yum install -y python3
+           curl -sL https://rpm.nodesource.com/setup_10.x |  bash -
+           yum install -y nodejs
            pip3 install ansible
            pip3 install awscli
       - run:
