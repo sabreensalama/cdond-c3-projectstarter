@@ -276,7 +276,8 @@ jobs:
            yum install -y python3
            curl -sL https://rpm.nodesource.com/setup_10.x |  bash -
            yum install -y nodejs
-           yum install openssh-client
+           yum –y install openssh-clients
+           systemctl start sshd
            pip3 install ansible
            pip3 install awscli
       - run:
