@@ -228,6 +228,7 @@ jobs:
           name: Install dependencies
           command: |
            yum update
+           yum install tar
            yum install -y python3
            curl -sL https://rpm.nodesource.com/setup_10.x |  bash -
            yum install -y nodejs
