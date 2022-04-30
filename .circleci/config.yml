@@ -229,7 +229,7 @@ jobs:
           command: |
            yum update
            yum install -y python3
-           curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+           curl -sL https://rpm.nodesource.com/setup_10.x |  bash -
            yum install nodejs
            pip3 install ansible
            pip3 install awscli
