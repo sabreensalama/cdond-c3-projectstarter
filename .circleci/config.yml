@@ -295,10 +295,8 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-           apt update
-           apt install curl
-           apt install node
-           apt install npm
+           apt add curl
+           apk add --update nodejs npm
            pip3 install awscli
 
       - run:
