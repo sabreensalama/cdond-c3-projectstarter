@@ -274,7 +274,7 @@ jobs:
           command: |
            yum update
            yum install -y python3
-           curl -sL https://rpm.nodesource.com/setup_10.x |  bash -
+           curl -sL https://rpm.nodesource.com/setup_12.x |  bash -
            yum install -y nodejs
            yum –y install openssh-clients
            systemctl start sshd
