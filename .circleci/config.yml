@@ -269,7 +269,7 @@ jobs:
           name: Install dependencies
           command: |
            apk add  tar gzip
-           apk add build-base
+           apk --update --upgrade add gcc musl-dev jpeg-dev zlib-dev libffi-dev cairo-dev pango-dev gdk-pixbuf-dev
            pip3 install ansible
            pip3 install awscli
       - run:
