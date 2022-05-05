@@ -339,12 +339,18 @@ jobs:
       - run:
           name: Update cloudfront distribution
           command: |
-           # Change the initial stack name, as applicable to you
+             export OldWorkflowID=$(aws cloudformation \
+                    list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+                    --no-paginate --output text| cut -d '-' -f 2)
+            echo OldWorkflowID: "${OldWorkflowID}"
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
-            --stack-name udapeople \
+            --stack-name udapeople-${OldWorkflowID} \
             --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --tags project=udapeople --region="us-east-1"
+            --tags project=udapeople 
+            echo "old workflow id:${OldWorkflowID}"
+            echo "current workflow id: ${CIRCLE_WORKFLOW_ID:0:7}"
+
       - revert-migrations:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - destroy-environment:
@@ -406,8 +412,8 @@ workflows:
 #           requires: [run-migrations]
 #       - smoke-test:
 #           requires: [deploy-backend, deploy-frontend]
-#       - cloudfront-update:
+      - cloudfront-update
 #           requires: [smoke-test]
-        - cleanup
+#         - cleanup:
 #           requires: [cloudfront-update]
 
