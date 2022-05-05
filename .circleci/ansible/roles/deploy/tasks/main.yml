@@ -3,6 +3,14 @@
   apt: 
    update_cache: yes
    
+- name: install rsync 
+    connection: local
+    package:
+      name: 
+        - openssh
+        - rsync
+      state: present
+   
 - name: "move files to server"
   synchronize:
     src: /root/project/backend/dist
