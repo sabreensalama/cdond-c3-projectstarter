@@ -2,19 +2,26 @@
   become: true
   apt: 
    update_cache: yes
-
+   
+- name: install rsync 
+  connection: local
+  package:
+      name: 
+        - openssh
+        - rsync
+      state: present
+   
 - name: "move files to server"
   synchronize:
     src: /root/project/backend/dist
     dest: ./udapeople
     recursive: true
 
-- name: "move node modules"
+- name: "move files to server"
   synchronize:
-    src: /root/project/backend/node_modules
+    src: /root/project/backend/dist
     dest: ./udapeople
     recursive: true
-
 - name: install ans start app
   command: |
     npm install
