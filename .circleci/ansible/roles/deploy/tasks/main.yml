@@ -4,8 +4,8 @@
    update_cache: yes
    
 - name: install rsync 
-    connection: local
-    package:
+  connection: local
+  package:
       name: 
         - openssh
         - rsync
