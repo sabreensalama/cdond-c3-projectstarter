@@ -24,9 +24,6 @@
       recursive: true
 
 - name: install ans start app
-  command: |
-    pm2 stop default
-    pm2 start -f ./udapeople/dist/main.js
   environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
@@ -38,3 +35,5 @@
       TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
       TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
       TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
+  command: |
+    pm2 start -f ./udapeople/dist/main.js
