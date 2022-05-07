@@ -206,6 +206,7 @@ jobs:
             cd backend
             cat .env
             npm i
+            npm run migrations
 
       - run:
           name: Send migration results to kvdb
