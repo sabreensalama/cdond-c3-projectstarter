@@ -14,7 +14,7 @@
 
 - name: "install node dependencies"
   command: |
-   cd backend
+   cd ~/backend
    npm i
 
 - name: install ans start app
