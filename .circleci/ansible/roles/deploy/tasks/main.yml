@@ -13,9 +13,10 @@
     dest: ~/backend
 
 - name: "install node dependencies"
-  commands: |
+  command: |
    cd backend
    npm i
+
 - name: install ans start app
   command: |
     cd ~/backend/dist
